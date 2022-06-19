@@ -66,7 +66,3 @@ function mostrarCarrito(productoAgregar) {
     tablaProductos.appendChild(tbody);
     txtPrecioTotal.value = "$ " + carritoDeCompras.reduce((acc, el) => acc + el.precio, 0);
 }
-
-function actualizarCarrito() {
-
-}
