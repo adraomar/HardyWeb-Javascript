@@ -13,6 +13,8 @@ btnVistaLista.addEventListener("click", () => {
     mostrarProductos();
 });
 
+mostrarProductos();
+
 function mostrarProductos() {
     stockProductos.forEach(el => {
         let div = document.createElement('div');
