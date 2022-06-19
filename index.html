@@ -216,8 +216,10 @@
                     <h1 class="h2">Todos los productos</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Lista</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Cuadros</button>
+                            <button id="botonLista" type="button"
+                                class="btn btn-sm btn-outline-secondary">Lista</button>
+                            <button id="botonCuadricula" type="button"
+                                class="btn btn-sm btn-outline-secondary">Cuadros</button>
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                             <span data-feather="calendar" class="align-text-bottom"></span>
@@ -227,44 +229,35 @@
                 </div>
 
                 <div id="contenedor-productos">
-                    <div class="card mb-3">
-                        <!-- <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="card-title">Producto 1</h5>
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                              <button type="button" class="btn btn-success">Agregar al Carrito</button>
-                            </div>
-                          </div>
-                        </div> -->
-                    </div>
+
                 </div>
 
-                <h2 class="h2 pt-3 pb-2 mb-3 border-bottom">Section title</h2>
+                <h2 class="h2 pt-3 pb-2 mb-3 border-bottom">Lista de Carrito</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm" id="tabla-productos">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
+                                <th scope="col"># ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Precio</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                        </tbody>
                     </table>
+                </div>
+                <div class="row border-top">
+                    <div class="col">
+                        <div class="m-3">
+                            <label for="formGroupExampleInput" class="form-label">Precio total</label>
+                            <input type="text" class="form-control" id="txtPrecioFinal" readonly>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
                 </div>
                 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                     <div class="col-md-4 d-flex align-items-center">

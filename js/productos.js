@@ -1,17 +1,5 @@
 let stockProductos = [
     {id: 1, nombre:"Procesador i3", tipo:"procesadores", precio: 1500, img: 'https://www.profesionalreview.com/wp-content/uploads/2020/10/i3-10-generacion.jpg'},
     {id: 2, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: 'https://bigpoint.com.ar/wp-content/uploads/2020/05/Procesador-Intel-i5-10400-10%E1%B5%90%E1%B5%83-Generaci%C3%B3n.jpg'},
-    {id: 3, nombre:"Procesador i7", tipo:"procesadores", precio: 1500, img: 'https://bigpoint.com.ar/wp-content/uploads/2020/06/Procesador-Intel-i7-10700.jpg'},
-    {id: 4, nombre:"Procesador Ryzen 3", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 5, nombre:"Procesador Ryzen 5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 6, nombre:"Procesador Ryzen 3", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 7, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 8, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 9, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 10, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 11, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 12, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 13, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 14, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-    {id: 15, nombre:"Procesador i5", tipo:"procesadores", precio: 1500, img: '...'},
-]
+    {id: 3, nombre:"Procesador i7", tipo:"procesadores", precio: 1500, img: 'https://bigpoint.com.ar/wp-content/uploads/2020/06/Procesador-Intel-i7-10700.jpg'}
+];
