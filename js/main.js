@@ -21,14 +21,14 @@ function mostrarProductos() {
         div.className = 'card mb-3';
         div.innerHTML = `
         <div class="row g-0">
-            <div class="col-md-4">
-                <img src="${el.img}" class="img-fluid rounded-start" style="width: 18rem;" alt="...">
+            <div class="col-md-2">
+                <img src="${el.img}" class="img-fluid rounded-start" style="width: 13rem;" alt="...">
              </div>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card-body">
                     <h5 class="card-title">${el.nombre}</h5>
-                    <p class="card-text">${el.precio}</p>
-                    <button id="boton${el.id}" type="button" class="btn btn-success">Agregar al carrito</button>
+                    <p class="card-text">Precio: $ ${el.precio}</p>
+                    <button id="boton${el.id}" type="button" class="btn btn-success"><i class="bi bi-cart-plus-fill"></i> Agregar al carrito</button>
                 </div>
             </div>
         </div>`;
@@ -52,8 +52,7 @@ function agregarAlCarrito(id) {
 
 function mostrarCarrito(productoAgregar) {
     let tbody = document.createElement('tbody');
-    let txtPrecioTotal = document.getElementById('txtPrecioFinal');
-
+    
     tbody.innerHTML += `
         <tr>
             <td>${carritoDeCompras.indexOf(productoAgregar) + 1}</td>
@@ -64,5 +63,10 @@ function mostrarCarrito(productoAgregar) {
         </tr>`
 
     tablaProductos.appendChild(tbody);
+    actualizarCarrito();
+}
+
+function actualizarCarrito() {
+    let txtPrecioTotal = document.getElementById('txtPrecioFinal');
     txtPrecioTotal.value = "$ " + carritoDeCompras.reduce((acc, el) => acc + el.precio, 0);
 }
