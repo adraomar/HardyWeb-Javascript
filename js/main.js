@@ -45,8 +45,9 @@ function mostrarProductos() {
 // Carrito System
 function agregarAlCarrito(id) {
     let productoAgregar = stockProductos.find(item => item.id === id)
-    console.log(productoAgregar);
+    console.log("Se ha agregado un producto al carrito.");
     carritoDeCompras.push(productoAgregar);
+    localStorage.setItem("CarritoDeCompras", JSON.stringify(carritoDeCompras));
     mostrarCarrito(productoAgregar)
 }
 
