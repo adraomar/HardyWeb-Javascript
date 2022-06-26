@@ -5,14 +5,6 @@ const btnVistaCuad = document.getElementById("botonCuadricula");
 const btnVistaLista = document.getElementById("botonLista");
 const tablaProductos = document.getElementById("tabla-productos");
 
-btnVistaCuad.addEventListener("click", () => {
-    mostrarProductos();
-});
-
-btnVistaLista.addEventListener("click", () => {
-    mostrarProductos();
-});
-
 mostrarProductos();
 
 function mostrarProductos() {
@@ -55,12 +47,12 @@ function mostrarCarrito(productoAgregar) {
     let tbody = document.createElement('tbody');
     
     tbody.innerHTML += `
-        <tr>
+        <tr id=tr-${carritoDeCompras.indexOf(productoAgregar)}>
             <td>${carritoDeCompras.indexOf(productoAgregar) + 1}</td>
             <td>${productoAgregar.nombre}</td>
             <td>${productoAgregar.tipo}</td>
             <td>$ ${productoAgregar.precio}</td>
-            <td><button id="botonEliminar${productoAgregar.id}" type="button" class="btn btn-danger">Eliminar</button></td>
+            <td><button id="btnEliminar" type="button" class="btn btn-danger">Eliminar</button></td>
         </tr>`
 
     tablaProductos.appendChild(tbody);
