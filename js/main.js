@@ -3,10 +3,6 @@ let carritoDeCompras = [];
 const contenedorProductos = document.getElementById("contenedor-productos");
 const tablaProductos = document.getElementById("tabla-productos");
 
-btnMostrarProductos.addEventListener('click', () => {
-    mostrarProductos();
-})
-
 function mostrarProductos() {
     stockProductos.forEach(el => {
         let div = document.createElement('div');
