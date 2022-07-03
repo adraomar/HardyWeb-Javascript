@@ -1,6 +1,7 @@
 let carritoDeCompras = [];
 
 const contenedorProductos = document.getElementById("contenedor-productos");
+const txtCantidadProductos = document.getElementById("txtCantidadProductos");
 
 function mostrarProductos() {
     stockProductos.forEach(el => {
@@ -48,6 +49,7 @@ function mostrarProductos() {
                         'success'
                     )
                     agregarAlCarrito(el.id);
+                    actualizarSeleccionados();
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
@@ -61,6 +63,7 @@ function mostrarProductos() {
             })
         });
     });
+    actualizarSeleccionados()
 }
 
 // Carrito System
@@ -69,4 +72,15 @@ function agregarAlCarrito(id) {
     console.log("Se ha agregado un producto al carrito.");
     carritoDeCompras.push(productoAgregar);
     localStorage.setItem("CarritoDeCompras", JSON.stringify(carritoDeCompras));
+    actualizarSeleccionados();
+}
+
+function actualizarSeleccionados() {
+    let contador = 0;
+
+    carritoDeCompras.forEach(producto => {
+        contador++;
+    });
+
+    txtCantidadProductos.value = contador;
 }
