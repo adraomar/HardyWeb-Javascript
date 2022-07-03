@@ -36,7 +36,7 @@ function mostrarProductos() {
             swalWithBootstrapButtons.fire({
                 title: '¿Desea agregar este producto al carrito?',
                 text: "",
-                icon: 'warning',
+                icon: 'info',
                 showCancelButton: true,
                 confirmButtonText: 'Agregar',
                 cancelButtonText: 'Cancelar',
