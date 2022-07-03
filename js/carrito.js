@@ -22,7 +22,7 @@ function mostrarCarrito() {
         `
         tbody.appendChild(tr);
 
-        precioFinal = precioFinal + producto.precio;
+        precioFinal += producto.precio;
     });
 
     tablaProductos.appendChild(tbody);
