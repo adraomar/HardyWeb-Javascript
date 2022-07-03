@@ -24,7 +24,41 @@ function mostrarProductos() {
 
         let btnAgregar = document.getElementById(`boton${el.id}`);
         btnAgregar.addEventListener('click', () => {
-            agregarAlCarrito(el.id);
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: '¿Desea agregar este producto al carrito?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Agregar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Producto agregado',
+                        'Se ha agregado este producto al carrito correctamente!',
+                        'success'
+                    )
+                    agregarAlCarrito(el.id);
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'No se ha agregado ningun producto al carrito!',
+                        'error'
+                    )
+                }
+            })
         });
     });
 }

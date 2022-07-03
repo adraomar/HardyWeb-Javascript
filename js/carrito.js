@@ -5,7 +5,6 @@ const txtPrecioFinal = document.getElementById("txtPrecioFinal");
 
 function mostrarCarrito() {
     let tbody = document.querySelector('tbody');
-    let precioFinal = 0;
 
     carrito.forEach(producto => {
         let index = carrito.indexOf(producto);
@@ -21,49 +20,66 @@ function mostrarCarrito() {
             </td>
         `
         tbody.appendChild(tr);
-
-        precioFinal += producto.precio;
+        actualizarPrecioFinal();
     });
 
     tablaProductos.appendChild(tbody);
-    txtPrecioFinal.value = "$ " + (precioFinal.toLocaleString('de-DE'));
 }
 
 function eliminarProducto(index) {
-    console.log("Producto eliminado ID: " + index);
-    let tr = document.getElementById(`tr-${index}`);
-    tr.remove();
-    carrito.splice(index, 1);
-    localStorage.removeItem("CarritoDeCompras");
-    localStorage.setItem("CarritoDeCompras", JSON.stringify(carrito));
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: '¿Desea eliminar este producto del carrito?',
+        text: "Si eliminas un producto deberás volver a la página principal para volver a agregarlo.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+                'Producto eliminado!',
+                'Se ha eliminado este producto del carrito correctamente!',
+                'success'
+            )
+
+            console.log("Producto eliminado ID: " + index);
+            let tr = document.getElementById(`tr-${index}`);
+            tr.remove();
+            carrito.splice(index, 1);
+            localStorage.removeItem("CarritoDeCompras");
+            localStorage.setItem("CarritoDeCompras", JSON.stringify(carrito));
+            actualizarPrecioFinal();
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'Cancelado',
+                'No se ha eliminado ningun producto del carrito!',
+                'error'
+            )
+        }
+    })
 }
 
-/*
-<button id="botonDelete-${index}" type="button" class="btn btn-danger">Eliminar</button>
+function actualizarPrecioFinal() {
+    let precioFinal = 0;
 
-function eliminarCarrito(producto) {
-    let tr = document.getElementById(`producto-${producto.id}`);
-    tr.remove();
-    let idx = carritoDeCompras.map(producto => producto.nombre).indexOf(producto.nombre);
-    carritoDeCompras.splice(idx, 1);
+    carrito.forEach(producto => {
+        precioFinal += producto.precio;
+    });
 
-    console.log(idx)
-    console.log(carritoDeCompras)
-    actualizarCarrito();
+    txtPrecioFinal.value = "$ " + (precioFinal.toLocaleString('de-DE'));
 }
-
-function actualizarCarrito() {
-    let txtPrecioTotal = document.getElementById('txtPrecioFinal');
-    txtPrecioTotal.value = "$ " + carritoDeCompras.reduce((acc, el) => acc + el.precio, 0);
-}
-
-function removerItemArray(array, item) {
-    var i = array.indexOf(item);
- 
-    if (i !== -1) {
-        array.splice(i, 1);
-    }
-} */
 
 function obtenerProductoPorNombre(productos, nombre) {
     return productos.filter(
