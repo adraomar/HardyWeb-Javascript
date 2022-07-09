@@ -6,7 +6,7 @@ const txtCantidadProductos = document.getElementById("txtCantidadProductos");
 
 function mostrarProductos() {
 
-    fetch('http://localhost:3000/productos').then(response => response.json()).then(productos => {
+    fetch("http://localhost:3000/productos").then(response => response.json()).then(productos => {
         stock = productos;
         renderProductos(productos);
     })
