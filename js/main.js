@@ -1,9 +1,18 @@
 let carritoDeCompras = [];
+let stock = [];
 
 const contenedorProductos = document.getElementById("contenedor-productos");
 const txtCantidadProductos = document.getElementById("txtCantidadProductos");
 
 function mostrarProductos() {
+
+    fetch('http://localhost:3000/productos').then(response => response.json()).then(productos => {
+        stock = productos;
+        renderProductos(productos);
+    })
+}
+
+function renderProductos(stockProductos) {
     stockProductos.forEach(el => {
         let div = document.createElement('div');
         div.className = 'card mb-3';
@@ -51,7 +60,6 @@ function mostrarProductos() {
                     agregarAlCarrito(el.id);
                     actualizarSeleccionados();
                 } else if (
-                    /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
@@ -63,12 +71,11 @@ function mostrarProductos() {
             })
         });
     });
-    actualizarSeleccionados()
 }
 
 // Carrito System
 function agregarAlCarrito(id) {
-    let productoAgregar = stockProductos.find(item => item.id === id)
+    let productoAgregar = stock.find(item => item.id === id)
     console.log("Se ha agregado un producto al carrito.");
     carritoDeCompras.push(productoAgregar);
     localStorage.setItem("CarritoDeCompras", JSON.stringify(carritoDeCompras));
