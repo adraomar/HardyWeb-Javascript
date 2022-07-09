@@ -13,7 +13,7 @@ function mostrarCarrito() {
         tr.innerHTML += `
         <td>${index + 1}</td>
             <td>${producto.nombre}</td>
-            <td>${producto.tipo}</td>
+            <td>${producto.categoria}</td>
             <td>$ ${producto.precio.toLocaleString('de-DE')}</td>
             <td>
             <button id="btnEliminar" onclick="eliminarProducto(${index})" type="button" class="btn btn-danger">Eliminar</button>
