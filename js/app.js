@@ -6,25 +6,30 @@ const txtCantidadProductos = document.getElementById("txtCantidadProductos");
 
 function mostrarProductos() {
 
-    fetch('http://localhost:3000/productos').then(response => response.json()).then(productos => {
+    /*fetch('http://localhost:3000/productos').then(response => response.json()).then(productos => {
         stock = productos;
         renderProductos(productos);
-    })
+    })*/
+
+    fetch('https://dummyjson.com/products').then(response => response.json()).then(prod => {
+        stock = prod;
+        renderProductos(prod);
+    });
 }
 
 function renderProductos(stockProductos) {
-    stockProductos.forEach(el => {
+    stockProductos.products.forEach(el => {
         let div = document.createElement('div');
         div.className = 'card mb-3';
         div.innerHTML = `
         <div class="row g-0">
             <div class="col-md-2">
-                <img src="${el.img}" class="img-fluid rounded-start" style="width: 13rem;" alt="...">
+                <img src="${el.images[2]}" class="img-fluid rounded-start" style="width: 13rem;" alt="...">
              </div>
             <div class="col-md-10">
                 <div class="card-body">
-                    <h5 class="card-title">${el.nombre}</h5>
-                    <p class="card-text">Precio: $ ${el.precio.toLocaleString('de-DE')}</p>
+                    <h5 class="card-title">${el.title}</h5>
+                    <p class="card-text">Precio: $ ${el.price.toLocaleString('de-DE')}</p>
                     <button id="boton${el.id}" type="button" class="btn btn-success"><i class="bi bi-cart-plus-fill"></i> Agregar al carrito</button>
                 </div>
             </div>
@@ -52,6 +57,7 @@ function renderProductos(stockProductos) {
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
+                    console.log(`${el.id}`);
                     swalWithBootstrapButtons.fire(
                         'Producto agregado',
                         'Se ha agregado este producto al carrito correctamente!',
@@ -75,7 +81,7 @@ function renderProductos(stockProductos) {
 
 // Carrito System
 function agregarAlCarrito(id) {
-    let productoAgregar = stock.find(item => item.id === id)
+    let productoAgregar = stock.products.find(item => item.id === id)
     console.log("Se ha agregado un producto al carrito.");
     carritoDeCompras.push(productoAgregar);
     localStorage.setItem("CarritoDeCompras", JSON.stringify(carritoDeCompras));

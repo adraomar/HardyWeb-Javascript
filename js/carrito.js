@@ -12,9 +12,9 @@ function mostrarCarrito() {
         tr.setAttribute("id", "tr-" + index);
         tr.innerHTML += `
         <td>${index + 1}</td>
-            <td>${producto.nombre}</td>
-            <td>${producto.categoria}</td>
-            <td>$ ${producto.precio.toLocaleString('de-DE')}</td>
+            <td>${producto.title}</td>
+            <td>${producto.category}</td>
+            <td>$ ${producto.price.toLocaleString('de-DE')}</td>
             <td>
             <button id="btnEliminar" onclick="eliminarProducto(${index})" type="button" class="btn btn-danger">Eliminar</button>
             </td>
@@ -75,7 +75,7 @@ function actualizarPrecioFinal() {
     let precioFinal = 0;
 
     carrito.forEach(producto => {
-        precioFinal += producto.precio;
+        precioFinal += producto.price;
     });
 
     txtPrecioFinal.value = "$ " + (precioFinal.toLocaleString('de-DE'));
