@@ -30,7 +30,7 @@ botonIngresar.addEventListener('click', () => {
             return { login: login, password: password }
         }
     }).then((result) => {
-        let validado = verificarUsuario(`${result.value.login}`, `${result.value.password}`)
+        let validado = verificarUsuario(`${result.value.login}`)
 
         if (validado) {
             Swal.fire({
@@ -71,8 +71,8 @@ function verificarUsuario(usuario, password) {
     return resultado;
 }
 
-function guardarUsuario(usuario, password) {
-    let usuarioAgregar = [usuario, password];
+function guardarUsuario(usuario) {
+    let usuarioAgregar = usuario;
     console.log("Se ha agregado un usuario al localstorage.");
     aUsuarios.push(usuarioAgregar);
     localStorage.setItem("UserData", JSON.stringify(aUsuarios));
