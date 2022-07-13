@@ -4,29 +4,6 @@ const textUsuario = document.getElementById("txtUsuario");
 const textPassword = document.getAnimations("txtPassword");
 
 botonIngresar.addEventListener('click', () => {
-    /*const { value: verificado } = await Swal.fire({
-        title: 'Ingresar datos de usuario',
-        html:
-            '<form>' +
-            '<div class="mt-4 mb-3 text-start">' +
-            '<label for="txtUsuario" class="form-label">Nombre de usuario: </label>' +
-            '<input type="text" class="form-control" id="txtUsuario" placeholder="Nombre de usuario...">' +
-            '</div>' +
-            '<div class="mb-5 text-start">' +
-            '<label for="txtPassword" class="form-label">Contraseña: </label>' +
-            '<input type="password" class="form-control" id="txtPassword" placeholder="•••••••••">' +
-            '</div>' +
-            '</form>',
-        focusConfirm: false,
-        preConfirm: () => {
-            return verificarUsuario(document.getElementById('txtUsuario').value, document.getElementById('txtPassword').value)
-        }
-    })
-
-    if (verificado) {
-        Swal.fire(JSON.stringify(verificado))
-    }*/
-
     Swal.fire({
         title: 'Ingresar datos de usuario',
         html:
@@ -72,7 +49,6 @@ botonIngresar.addEventListener('click', () => {
         }
 
     })
-
 })
 
 function verificarUsuario(usuario, password) {
