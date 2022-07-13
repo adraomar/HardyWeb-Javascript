@@ -40,7 +40,7 @@ botonIngresar.addEventListener('click', () => {
                 confirmButtonText: 'Cerrar'
             });
 
-            guardarUsuario(`${result.value.login}`);
+            guardarUsuario(`${result.value.login}`, true);
             contenedorBotonesIngreso.removeChild(botonIngresar);
             contenedorBotonesIngreso.removeChild(botonRegistrar);
             actualizarNavbar(aUsuarios);
@@ -71,8 +71,8 @@ function verificarUsuario(usuario, password) {
     return resultado;
 }
 
-function guardarUsuario(usuario) {
-    let usuarioAgregar = usuario;
+function guardarUsuario(usuario, validacion) {
+    let usuarioAgregar = [usuario, validacion];
     console.log("Se ha agregado un usuario al localstorage.");
     aUsuarios.push(usuarioAgregar);
     localStorage.setItem("UserData", JSON.stringify(aUsuarios));
