@@ -30,7 +30,7 @@ botonIngresar.addEventListener('click', () => {
             return { login: login, password: password }
         }
     }).then((result) => {
-        let validado = verificarUsuario(`${result.value.login}`)
+        let validado = verificarUsuario(`${result.value.login}`, `${result.value.password}`)
 
         if (validado) {
             Swal.fire({
@@ -40,7 +40,7 @@ botonIngresar.addEventListener('click', () => {
                 confirmButtonText: 'Cerrar'
             });
 
-            guardarUsuario(`${result.value.login}`, `${result.value.password}`);
+            guardarUsuario(`${result.value.login}`);
             contenedorBotonesIngreso.removeChild(botonIngresar);
             contenedorBotonesIngreso.removeChild(botonRegistrar);
             actualizarNavbar(aUsuarios);
