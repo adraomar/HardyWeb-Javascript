@@ -1,0 +1,10 @@
+{
+    "usuarios":[{
+        "id": 1,
+        "apellido": "Adra",
+        "nombre": "Omar Alberto",
+        "usuario": "adraomar",
+        "password": "qwe789**"
+    }
+    ]
+}
