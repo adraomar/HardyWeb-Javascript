@@ -54,7 +54,15 @@ botonIngresar.addEventListener('click', () => {
     }).then((result) => {
         let validado = verificarUsuario(`${result.value.login}`, `${result.value.password}`)
 
-        if (!validado) {
+        if (validado) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Acceso exitoso!',
+                text: 'Te has conectado con las credenciales correctamente.',
+                confirmButtonText: 'Cerrar'
+            })
+        }
+        else {    
             Swal.fire({
                 icon: 'error',
                 title: '¡Error!',
