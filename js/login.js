@@ -1,3 +1,5 @@
+let aUsuarios = [];
+
 const botonIngresar = document.getElementById("btnIngresar");
 const botonRegistrar = document.getElementById("btnRegistrar");
 const contenedorBotonesIngreso = document.getElementById("ingreso-registro");
@@ -36,26 +38,14 @@ botonIngresar.addEventListener('click', () => {
                 title: '¡Acceso exitoso!',
                 text: 'Te has conectado con las credenciales correctamente.',
                 confirmButtonText: 'Cerrar'
-            })
+            });
+
+            guardarUsuario(`${result.value.login}`, `${result.value.password}`);
             contenedorBotonesIngreso.removeChild(botonIngresar);
             contenedorBotonesIngreso.removeChild(botonRegistrar);
-
-            let div = document.createElement('div');
-            div.className = 'btn-group mx-3 px-3';
-            div.innerHTML = `
-            <button type="button" class="btn btn-primary">${result.value.login}</button>
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
-                <li><a class="dropdown-item" href="#">Configuración</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Desconectarse</a></li>
-            </ul>
-            `;
-
-            contenedorBotonesIngreso.appendChild(div);
+            actualizarNavbar(aUsuarios);
+            
+            
         }
         else {
             Swal.fire({
@@ -79,4 +69,30 @@ function verificarUsuario(usuario, password) {
     }
 
     return resultado;
+}
+
+function guardarUsuario(usuario, password) {
+    let usuarioAgregar = [usuario, password];
+    console.log("Se ha agregado un usuario al localstorage.");
+    aUsuarios.push(usuarioAgregar);
+    localStorage.setItem("UserData", JSON.stringify(aUsuarios));
+}
+
+function actualizarNavbar(usuario) {
+    let div = document.createElement('div');
+    div.className = 'btn-group mx-3 px-3';
+    div.innerHTML = `
+    <button type="button" class="btn btn-primary">${usuario[0]}</button>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+        <li><a class="dropdown-item" href="#">Configuración</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Desconectarse</a></li>
+    </ul>
+    `;
+
+    contenedorBotonesIngreso.appendChild(div);
 }
