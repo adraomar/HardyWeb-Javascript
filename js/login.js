@@ -39,13 +39,25 @@ botonIngresar.addEventListener('click', () => {
             })
             contenedorBotonesIngreso.removeChild(botonIngresar);
             contenedorBotonesIngreso.removeChild(botonRegistrar);
-            
-            let h3 = document.createElement('h3');
-            h3.className = 'h3 text-light';
-            h3.innerText = `${result.value.login}`;
-            contenedorBotonesIngreso.appendChild(h3);
+
+            let div = document.createElement('div');
+            div.className = 'btn-group mx-3 px-3';
+            div.innerHTML = `
+            <button type="button" class="btn btn-primary">${result.value.login}</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Desconectarse</a></li>
+            </ul>
+            `;
+
+            contenedorBotonesIngreso.appendChild(div);
         }
-        else {    
+        else {
             Swal.fire({
                 icon: 'error',
                 title: '¡Error!',
