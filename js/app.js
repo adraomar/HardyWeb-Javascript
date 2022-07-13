@@ -5,12 +5,6 @@ const contenedorProductos = document.getElementById("contenedor-productos");
 const txtCantidadProductos = document.getElementById("txtCantidadProductos");
 
 function mostrarProductos() {
-
-    /*fetch('http://localhost:3000/productos').then(response => response.json()).then(productos => {
-        stock = productos;
-        renderProductos(productos);
-    })*/
-
     fetch('https://dummyjson.com/products').then(response => response.json()).then(prod => {
         stock = prod;
         renderProductos(prod);
