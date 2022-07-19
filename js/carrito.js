@@ -11,14 +11,14 @@ function mostrarCarrito() {
         let tr = document.createElement('tr');
         tr.setAttribute("id", "tr-" + index);
         tr.innerHTML += `
-        <td>${index + 1}</td>
-            <td>${producto.title}</td>
-            <td>${producto.category}</td>
-            <td>$ ${producto.price.toLocaleString('de-DE')}</td>
-            <td>
-            <button id="btnEliminar" onclick="eliminarProducto(${index})" type="button" class="btn btn-danger">Eliminar</button>
-            </td>
-        `
+            <td>${index + 1}</td>
+                <td>${producto.title}</td>
+                <td>${producto.category}</td>
+                <td>$ ${producto.price.toLocaleString('de-DE')}</td>
+                <td>
+                <button id="btnEliminar" onclick="eliminarProducto(${index})" type="button" class="btn btn-danger">Eliminar</button>
+                </td>
+            `
         tbody.appendChild(tr);
         actualizarPrecioFinal();
     });

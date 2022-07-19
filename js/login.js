@@ -1,4 +1,4 @@
-let aUsuarios = [];
+let aUsuarios = JSON.parse(localStorage.getItem("UserData"));
 
 const botonIngresar = document.getElementById("btnIngresar");
 const botonRegistrar = document.getElementById("btnRegistrar");
@@ -82,7 +82,7 @@ function actualizarNavbar(usuario) {
     let div = document.createElement('div');
     div.className = 'btn-group mx-3 px-3';
     div.innerHTML = `
-    <button type="button" class="btn btn-primary">${usuario[0]}</button>
+    <button type="button" class="btn btn-primary">${usuario[0][0]}</button>
     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="visually-hidden">Toggle Dropdown</span>
     </button>
