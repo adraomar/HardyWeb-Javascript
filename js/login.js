@@ -1,10 +1,86 @@
 let aUsuarios = JSON.parse(localStorage.getItem("UserData"));
 
-const botonIngresar = document.getElementById("btnIngresar");
-const botonRegistrar = document.getElementById("btnRegistrar");
+let botonIngresar = document.getElementById("btnIngresar");
+let botonRegistrar = document.getElementById("btnRegistrar");
 const contenedorBotonesIngreso = document.getElementById("ingreso-registro");
 
-botonIngresar.addEventListener('click', () => {
+function verificarUsuario(usuario, password) {
+    let resultado;
+
+    if (usuario == "admin" && password == "admin") {
+        resultado = true;
+    } else {
+        resultado = false;
+    }
+
+    return resultado;
+}
+
+function guardarUsuario(usuario, validacion) {
+    let usuarioAgregar = [usuario, validacion];
+    console.log("Se ha agregado un usuario al localstorage.");
+    aUsuarios.push(usuarioAgregar);
+    localStorage.setItem("UserData", JSON.stringify(aUsuarios));
+}
+
+function actualizarNavbar(usuario, logueado) {
+
+    switch (logueado) {
+        case 0:
+            /*
+            <button id="btnIngresar" type="button" class="btn btn-outline-success me-2">Ingresar</button>
+            <button id="btnRegistrar" type="button" class="btn btn-warning">Registrarse</button> 
+            */
+            let btnUsuario = document.getElementById("userData");
+            contenedorBotonesIngreso.removeChild(btnUsuario);
+
+            botonIngresar = document.createElement('button');
+            botonIngresar.setAttribute("id", "btnIngresar");
+            botonIngresar.setAttribute("type", "button");
+            botonIngresar.setAttribute("onclick", "mostrarLogin()");
+            botonIngresar.className = 'btn btn-outline-success me-2';
+            botonIngresar.innerHTML = 'Ingresar';
+
+            botonRegistrar = document.createElement('button');
+            botonRegistrar.setAttribute("id", "btnRegistrar");
+            botonRegistrar.setAttribute("type", "button");
+            botonRegistrar.className = 'btn btn-warning';
+            botonRegistrar.innerHTML = 'Registrarse';
+
+            contenedorBotonesIngreso.appendChild(botonIngresar);
+            contenedorBotonesIngreso.appendChild(botonRegistrar);
+            
+            break;
+        case 1:
+            let div = document.createElement('div');
+            div.setAttribute("id", "userData");
+            div.className = 'btn-group mx-3 px-3';
+            div.innerHTML = `
+                <button type="button" class="btn btn-primary">${usuario[0][0]}</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" onclick="desloguearUsuario()">Desconectarse</a></li>
+                </ul>
+                `;
+
+            contenedorBotonesIngreso.appendChild(div);
+            break;
+    }
+}
+
+function desloguearUsuario() {
+    localStorage.removeItem("UserData");
+    console.log("Datos de usuario eliminado de localstorage");
+    
+    actualizarNavbar(aUsuarios, 0);
+}
+
+function mostrarLogin() {
     Swal.fire({
         title: 'Ingresar datos de usuario',
         html:
@@ -57,49 +133,4 @@ botonIngresar.addEventListener('click', () => {
         }
 
     })
-})
-
-function verificarUsuario(usuario, password) {
-    let resultado;
-
-    if (usuario == "admin" && password == "admin") {
-        resultado = true;
-    } else {
-        resultado = false;
-    }
-
-    return resultado;
-}
-
-function guardarUsuario(usuario, validacion) {
-    let usuarioAgregar = [usuario, validacion];
-    console.log("Se ha agregado un usuario al localstorage.");
-    aUsuarios.push(usuarioAgregar);
-    localStorage.setItem("UserData", JSON.stringify(aUsuarios));
-}
-
-function actualizarNavbar(usuario, logueado) {
-
-    switch (logueado) {
-        case 0:
-            break;
-        case 1:
-            let div = document.createElement('div');
-            div.className = 'btn-group mx-3 px-3';
-            div.innerHTML = `
-                <button type="button" class="btn btn-primary">${usuario[0][0]}</button>
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
-                    <li><a class="dropdown-item" href="#">Configuración</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Desconectarse</a></li>
-                </ul>
-                `;
-
-            contenedorBotonesIngreso.appendChild(div);
-            break;
-    }
 }
