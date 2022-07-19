@@ -1,5 +1,6 @@
 let carritoDeCompras = [];
 let stock = [];
+let seleccionados = 0;
 
 const contenedorProductos = document.getElementById("contenedor-productos");
 const txtCantidadProductos = document.getElementById("txtCantidadProductos");
@@ -83,11 +84,22 @@ function agregarAlCarrito(id) {
 }
 
 function actualizarSeleccionados() {
-    let contador = 0;
-
     carritoDeCompras.forEach(producto => {
-        contador++;
+        seleccionados++;
     });
 
-    txtCantidadProductos.value = contador;
+    txtCantidadProductos.value = seleccionados;
+}
+
+function cargarElementos() {
+    mostrarProductos();
+    
+    if(aUsuarios[0][1] == true) {
+        contenedorBotonesIngreso.removeChild(botonIngresar);
+        contenedorBotonesIngreso.removeChild(botonRegistrar);
+        actualizarNavbar(aUsuarios);
+    }
+    else {
+        console.log("Ningun usuario logueado");
+    }
 }

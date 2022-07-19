@@ -1,4 +1,5 @@
 let carrito = JSON.parse(localStorage.getItem("CarritoDeCompras"));
+let aUsuarios = JSON.parse(localStorage.getItem("UserData"));
 
 const tablaProductos = document.getElementById("tabla-productos");
 const txtPrecioFinal = document.getElementById("txtPrecioFinal");
@@ -87,4 +88,17 @@ function obtenerProductoPorNombre(productos, nombre) {
             return producto.nombre == nombre
         }
     );
+}
+
+function cargarElementos() {
+    mostrarCarrito();
+    
+    if(aUsuarios[0][1] == true) {
+        contenedorBotonesIngreso.removeChild(botonIngresar);
+        contenedorBotonesIngreso.removeChild(botonRegistrar);
+        actualizarNavbar(aUsuarios);
+    }
+    else {
+        console.log("Ningun usuario logueado");
+    }
 }
