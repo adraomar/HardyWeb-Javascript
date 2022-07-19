@@ -95,32 +95,40 @@ function obtenerProductoPorNombre(productos, nombre) {
 
 function cargarElementos() {
     mostrarCarrito();
-    
-    if(aUsuarios[0][1] == true) {
+
+    if (aUsuarios[0][1] == true) {
         contenedorBotonesIngreso.removeChild(botonIngresar);
         contenedorBotonesIngreso.removeChild(botonRegistrar);
-        actualizarNavbar(aUsuarios);
+        actualizarNavbar(aUsuarios, 1);
     }
     else {
         console.log("Ningun usuario logueado");
     }
 }
 
-function actualizarNavbar(usuario) {
-    let div = document.createElement('div');
-    div.className = 'btn-group mx-3 px-3';
-    div.innerHTML = `
-    <button type="button" class="btn btn-primary">${usuario[0][0]}</button>
-    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="visually-hidden">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
-        <li><a class="dropdown-item" href="#">Configuración</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Desconectarse</a></li>
-    </ul>
-    `;
+function actualizarNavbar(usuario, logueado) {
 
-    contenedorBotonesIngreso.appendChild(div);
+    switch (logueado) {
+        case 1:
+            let div = document.createElement('div');
+            div.className = 'btn-group mx-3 px-3';
+            div.innerHTML = `
+                <button type="button" class="btn btn-primary">${usuario[0][0]}</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Desconectarse</a></li>
+                </ul>
+                `;
+
+            contenedorBotonesIngreso.appendChild(div);
+            break;
+        case 1:
+            break;
+    }
+
 }

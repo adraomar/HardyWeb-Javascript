@@ -99,7 +99,7 @@ function cargarElementos() {
     if(aUsuarios[0][1] == true) {
         contenedorBotonesIngreso.removeChild(botonIngresar);
         contenedorBotonesIngreso.removeChild(botonRegistrar);
-        actualizarNavbar(aUsuarios);
+        actualizarNavbar(aUsuarios, 1);
     }
     else {
         console.log("Ningun usuario logueado");
