@@ -84,10 +84,12 @@ function agregarAlCarrito(id) {
 }
 
 function actualizarSeleccionados() {
+    contador = 0;
     carritoDeCompras.forEach(producto => {
-        seleccionados++;
+        contador++;
     });
 
+    seleccionados = contador;
     txtCantidadProductos.value = seleccionados;
 }
 
