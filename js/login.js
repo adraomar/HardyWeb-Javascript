@@ -18,15 +18,13 @@ function verificarUsuario(usuario, password) {
 
 function guardarUsuario(usuario, validacion) {
     let usuarioAgregar = [usuario, validacion];
-    console.log("Se ha agregado un usuario al localstorage.");
     aUsuarios.push(usuarioAgregar);
     localStorage.setItem("UserData", JSON.stringify(aUsuarios));
+    console.log("Se ha agregado un usuario al localstorage.");
 }
 
 function desloguearUsuario() {
-    localStorage.removeItem("UserData");
     console.log("Datos de usuario eliminado de localstorage");
-
     actualizarNavbar(aUsuarios, 0);
 }
 
@@ -65,8 +63,8 @@ function mostrarLogin() {
                 text: 'Te has conectado con las credenciales correctamente.',
                 confirmButtonText: 'Cerrar'
             });
-
             guardarUsuario(`${result.value.login}`, true);
+            
             contenedorBotonesIngreso.removeChild(botonIngresar);
             contenedorBotonesIngreso.removeChild(botonRegistrar);
             actualizarNavbar(aUsuarios, 1);
@@ -118,7 +116,7 @@ function actualizarNavbar(usuario, logueado) {
             div.setAttribute("id", "userData");
             div.className = 'btn-group mx-3 px-3';
             div.innerHTML = `
-                <button type="button" class="btn btn-primary">${usuario[0][0]}</button>
+                <button type="button" class="btn btn-primary">${usuario[0]}</button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
