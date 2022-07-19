@@ -96,7 +96,7 @@ function actualizarSeleccionados() {
 function cargarElementos() {
     mostrarProductos();
     
-    if(aUsuarios[0][1] == true) {
+    if(aUsuarios !== null) {
         contenedorBotonesIngreso.removeChild(botonIngresar);
         contenedorBotonesIngreso.removeChild(botonRegistrar);
         actualizarNavbar(aUsuarios, 1);
