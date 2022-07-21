@@ -1,5 +1,5 @@
-let carritoDeCompras = [];
-let stock = [];
+let carritoDeCompras = new Array();
+let stock = new Array();
 let seleccionados = 0;
 
 const contenedorProductos = document.getElementById("contenedor-productos");
@@ -95,13 +95,4 @@ function actualizarSeleccionados() {
 
 function cargarElementos() {
     mostrarProductos();
-    
-    if(aUsuarios !== null) {
-        contenedorBotonesIngreso.removeChild(botonIngresar);
-        contenedorBotonesIngreso.removeChild(botonRegistrar);
-        actualizarNavbar(aUsuarios, 1);
-    }
-    else {
-        console.log("Ningun usuario logueado");
-    }
 }
