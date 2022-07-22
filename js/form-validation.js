@@ -1,22 +1,41 @@
 let carrito = JSON.parse(localStorage.getItem("CarritoDeCompras"));
+const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
 
-(() => {
-  'use strict'
-
+btnFinalizarCompra.addEventListener('click', e => {
   const forms = document.querySelectorAll('.needs-validation')
 
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        '¡Compra finalizada!',
+        'Los datos de envío y facturación fueron enviados a tu correo electrónico.',
+        'success'
+      )
 
-      form.classList.add('was-validated')
-    })
-  })
-  
-})()
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    }
+})
 
 function mostrarCarrito() {
 
@@ -52,5 +71,4 @@ function mostrarCarrito() {
   span.innerText = contador;
 
   tituloCarrito.appendChild(span);
-
 }
