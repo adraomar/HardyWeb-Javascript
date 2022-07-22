@@ -1,44 +1,27 @@
-let carrito = JSON.parse(localStorage.getItem("CarritoDeCompras"));
-const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
-
-btnFinalizarCompra.addEventListener('click', e => {
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
+  const btnVolver = document.getElementById("btnVolver");
 
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire(
-        '¡Compra finalizada!',
-        'Los datos de envío y facturación fueron enviados a tu correo electrónico.',
-        'success'
-      )
-
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.querySelectorAll('.needs-validation')
-
-      // Loop over them and prevent submission
-      Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-    }
-})
-})
+  btnVolver.addEventListener('click', () => {
+    location.href = '../index.html';
+  })
+  
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated');
+    }, false)
+  })
+})()
 
 function mostrarCarrito() {
+  let carrito = JSON.parse(localStorage.getItem("CarritoDeCompras"));
 
   let ul = document.getElementById("tu-carrito");
   let tituloCarrito = document.getElementById("titulo-carrito");

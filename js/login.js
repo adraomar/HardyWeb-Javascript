@@ -2,10 +2,11 @@ let aUsuarios = [{user: "admin", password: "admin", status: true}];
 
 function mostrarLogin() {
     Swal.fire({
-        title: 'Login Form',
+        title: 'Iniciar sesión',
         html: `<input type="text" id="login" class="swal2-input" placeholder="Username">
         <input type="password" id="password" class="swal2-input" placeholder="Password">`,
-        confirmButtonText: 'Sign in',
+        confirmButtonText: 'Conectarse',
+        confirmButtonColor: '#3085d6',
         focusConfirm: false,
         preConfirm: () => {
           const login = Swal.getPopup().querySelector('#login').value
