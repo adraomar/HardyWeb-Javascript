@@ -36,6 +36,7 @@ btnFinalizarCompra.addEventListener('click', e => {
       })
     }
 })
+})
 
 function mostrarCarrito() {
 
