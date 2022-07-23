@@ -35,9 +35,9 @@ function mostrarLogin() {
       let ingresoRegistro = document.getElementById("ingreso-registro");
 
       let div = document.createElement("div");
-      div.className = "dropdown";
+      div.className = "dropdown me-5 pe-3";
       div.innerHTML = `
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           ${aUsuarios[0].user}
       </button>
       <ul class="dropdown-menu">
