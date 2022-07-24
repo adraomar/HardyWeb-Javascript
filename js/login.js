@@ -75,3 +75,7 @@ function buscarUsuario(usuario, pass) {
 
   return u;
 }
+
+function cargarElementos() {
+  mostrarProductos();
+}
