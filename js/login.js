@@ -4,8 +4,8 @@ let dbUsuarios = [
   { id: 3, user: "omikpo", name: "Omar Adra", password: "4275591", status: false }
 ];
 
-const btnIngresar = document.getElementById("btnIngresar");
-const btnRegistrar = document.getElementById("btnRegistrar");
+let btnIngresar = document.getElementById("btnIngresar");
+let btnRegistrar = document.getElementById("btnRegistrar");
 
 function mostrarLogin() {
   Swal.fire({
@@ -51,9 +51,10 @@ function crearNavUser(usuario) {
   let ingresoRegistro = document.getElementById("ingreso-registro");
   let div = document.createElement("div");
 
-  btnIngresar.remove();
-  btnRegistrar.remove();
+  btnIngresar.className = "d-none";
+  btnRegistrar.className = "d-none";
   div.className = "dropdown me-5 pe-3";
+  div.setAttribute("id", "boton-usuario");
   div.innerHTML = `
       <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           ${usuario.name}
@@ -62,7 +63,7 @@ function crearNavUser(usuario) {
         <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
         <li><a class="dropdown-item" href="#">Configuraciones</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Desconectarse</a></li>
+        <li><button class="dropdown-item" href="#" onclick="logoutUsuario()">Desconectarse</button></li>
       </ul>
       `;
   ingresoRegistro.appendChild(div);
@@ -76,6 +77,28 @@ function buscarUsuario(usuario, pass) {
   return u;
 }
 
-function cargarElementos() {
-  mostrarProductos();
+function logoutUsuario() {
+  let usuario = JSON.parse(localStorage.getItem("UserData"));
+  lsData = {id: usuario.id, user: usuario.user, name: usuario.name, status: false};
+  localStorage.setItem("UserData", JSON.stringify(lsData));
+  estadoUsuario();
+}
+
+function estadoUsuario() {
+  let user = JSON.parse(localStorage.getItem("UserData"));
+  
+  if(user != null) {
+    if(user.status == false) {
+      console.log("Mostrar botones ingreso/registro");
+      let div = document.getElementById("boton-usuario");
+      div.remove();
+
+      btnIngresar.className = "btn btn-outline-success me-2";
+      btnRegistrar.className = "btn btn-warning";
+    } else {
+      crearNavUser(user);
+    }
+  } else {
+    console.log("No se cargo la info de ningun usuario!");
+  }
 }

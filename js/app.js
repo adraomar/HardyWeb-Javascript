@@ -92,3 +92,8 @@ function actualizarSeleccionados() {
     seleccionados = contador;
     txtCantidadProductos.value = seleccionados;
 }
+
+function cargarElementos() {
+    mostrarProductos();
+    estadoUsuario();
+}
