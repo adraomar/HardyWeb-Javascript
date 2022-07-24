@@ -36,13 +36,21 @@ function mostrarLogin() {
     let u = buscarUsuario(usuario, password);
     let lsData = {};
 
-    if(u != undefined) {
-      console.log("Usuario logueado");
+    if (u != undefined) {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Ingreso correcto!',
+        text: 'Te has conectado correctamente.',
+      })
       crearNavUser(u);
-      lsData = {id: u.id, user: u.user, name: u.name, status: true};
+      lsData = { id: u.id, user: u.user, name: u.name, status: true };
       localStorage.setItem("UserData", JSON.stringify(lsData));
     } else {
-      console.log("Usuario y/o contraseña ingresada incorrecta!");
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'El nombre de usuario y/o contraseña que has ingresado no son válidos.',
+      })
     }
   })
 }
@@ -78,20 +86,40 @@ function buscarUsuario(usuario, pass) {
 }
 
 function logoutUsuario() {
-  let usuario = JSON.parse(localStorage.getItem("UserData"));
-  lsData = {id: usuario.id, user: usuario.user, name: usuario.name, status: false};
-  localStorage.setItem("UserData", JSON.stringify(lsData));
-  estadoUsuario();
+  Swal.fire({
+    title: '¿Estás seguro que deseas desconectarte?',
+    text: "Tus productos dentro del carrito no se perderán.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Desconectarse'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        '¡Correcto!',
+        'Te has desconectado del sistema correctamente.',
+        'success'
+      )
+
+      let usuario = JSON.parse(localStorage.getItem("UserData"));
+      lsData = { id: usuario.id, user: usuario.user, name: usuario.name, status: false };
+      localStorage.setItem("UserData", JSON.stringify(lsData));
+      estadoUsuario();
+    }
+  })
 }
 
 function estadoUsuario() {
   let user = JSON.parse(localStorage.getItem("UserData"));
-  
-  if(user != null) {
-    if(user.status == false) {
-      console.log("Mostrar botones ingreso/registro");
+
+  if (user != null) {
+    if (user.status == false) {
       let div = document.getElementById("boton-usuario");
-      div.remove();
+
+      if (div != null) {
+        div.remove();
+      }
 
       btnIngresar.className = "btn btn-outline-success me-2";
       btnRegistrar.className = "btn btn-warning";

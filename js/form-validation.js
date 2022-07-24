@@ -1,6 +1,4 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
   const btnVolver = document.getElementById("btnVolver");
 
@@ -8,7 +6,6 @@
     location.href = '../index.html';
   })
   
-  // Loop over them and prevent submission
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
       if (!form.checkValidity()) {
@@ -32,19 +29,22 @@ function mostrarCarrito() {
   let contador = 0;
   let precioTotal = 0;
 
-  carrito.forEach(producto => {
-    ul.innerHTML += `
-    <li class="list-group-item d-flex justify-content-between lh-sm">
-      <div>
-        <h6 class="my-0">${producto.title}</h6>
-        <small class="text-muted">${producto.category}</small>
-      </div>
-      <span class="text-muted">$ ${producto.price.toLocaleString('de-DE')}</span>
-    </li>`;
-
-    contador++;
-    precioTotal += producto.price;
-  });
+  if(carrito != null) {
+    carrito.forEach(producto => {
+      ul.innerHTML += `
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">${producto.title}</h6>
+          <small class="text-muted">${producto.category}</small>
+        </div>
+        <span class="text-muted">$ ${producto.price.toLocaleString('de-DE')}</span>
+      </li>`;
+  
+      contador++;
+      precioTotal += producto.price;
+    });
+  }
+  
 
   ul.innerHTML += `
   <li class="list-group-item d-flex justify-content-between bg-dark text-white">

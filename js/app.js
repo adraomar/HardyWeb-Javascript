@@ -34,40 +34,43 @@ function renderProductos(stockProductos) {
 
         let btnAgregar = document.getElementById(`boton${el.id}`);
         btnAgregar.addEventListener('click', () => {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
 
-            swalWithBootstrapButtons.fire({
+            Swal.fire({
                 title: '¿Desea agregar este producto al carrito?',
                 text: "",
                 icon: 'info',
                 showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 confirmButtonText: 'Agregar',
                 cancelButtonText: 'Cancelar',
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     console.log(`${el.id}`);
-                    swalWithBootstrapButtons.fire(
-                        'Producto agregado',
-                        'Se ha agregado este producto al carrito correctamente!',
-                        'success'
-                    )
+                    Swal.fire({
+                        title: '¡Correcto!',
+                        text: "Producto agregado correctamente.",
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    })
                     agregarAlCarrito(el.id);
                     actualizarSeleccionados();
                 } else if (
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelado',
-                        'No se ha agregado ningun producto al carrito!',
-                        'error'
-                    )
+                    Swal.fire({
+                        title: '¡Cancelado!',
+                        text: "Este producto no se ha agregado al carrito.",
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    })
                 }
             })
         });

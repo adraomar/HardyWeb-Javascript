@@ -9,51 +9,51 @@ const contenedorBotonesIngreso = document.getElementById("ingreso-registro");
 function mostrarCarrito() {
     let tbody = document.querySelector('tbody');
 
-    carrito.forEach(producto => {
-        let index = carrito.indexOf(producto);
-        let tr = document.createElement('tr');
-        tr.setAttribute("id", "tr-" + index);
-        tr.innerHTML += `
-            <td>${index + 1}</td>
-                <td>${producto.title}</td>
-                <td>${producto.category}</td>
-                <td>$ ${producto.price.toLocaleString('de-DE')}</td>
-                <td>
-                <button id="btnEliminar" onclick="eliminarProducto(${index})" type="button" class="btn btn-danger">Eliminar</button>
-                </td>
-            `
-        tbody.appendChild(tr);
-        actualizarPrecioFinal();
-    });
+    if(carrito != null) {
+        carrito.forEach(producto => {
+            let index = carrito.indexOf(producto);
+            let tr = document.createElement('tr');
+            tr.setAttribute("id", "tr-" + index);
+            tr.innerHTML += `
+                <td>${index + 1}</td>
+                    <td>${producto.title}</td>
+                    <td>${producto.category}</td>
+                    <td>$ ${producto.price.toLocaleString('de-DE')}</td>
+                    <td>
+                    <button id="btnEliminar" onclick="eliminarProducto(${index})" type="button" class="btn btn-danger">Eliminar</button>
+                    </td>
+                `
+            tbody.appendChild(tr);
+            actualizarPrecioFinal();
+        });
+    }
+    
 
     tablaProductos.appendChild(tbody);
 }
 
 function eliminarProducto(index) {
-
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
+    Swal.fire({
         title: '¿Desea eliminar este producto del carrito?',
-        text: "Si eliminas un producto deberás volver a la página principal para volver a agregarlo.",
-        icon: 'warning',
+        text: "Puedes volver a todos los productos y agregarlo nuevamente.",
+        icon: 'info',
         showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
         confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar',
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
-                'Producto eliminado!',
-                'Se ha eliminado este producto del carrito correctamente!',
-                'success'
-            )
+            Swal.fire({
+                title: '¡Correcto!',
+                text: "Producto eliminado del carrito correctamente.",
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar'
+            })
 
             console.log("Producto eliminado ID: " + index);
             let tr = document.getElementById(`tr-${index}`);
@@ -62,14 +62,16 @@ function eliminarProducto(index) {
             localStorage.removeItem("CarritoDeCompras");
             localStorage.setItem("CarritoDeCompras", JSON.stringify(carrito));
             actualizarPrecioFinal();
-        } else if (
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            swalWithBootstrapButtons.fire(
-                'Cancelado',
-                'No se ha eliminado ningun producto del carrito!',
-                'error'
-            )
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+                title: '¡Cancelado!',
+                text: "Producto no ha sido eliminado del carrito.",
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar'
+            })
         }
     })
 }
@@ -94,4 +96,5 @@ function obtenerProductoPorNombre(productos, nombre) {
 
 function cargarElementos() {
     mostrarCarrito();
+    estadoUsuario();
 }
