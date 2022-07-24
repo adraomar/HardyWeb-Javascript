@@ -3,7 +3,6 @@ let stock = new Array();
 let seleccionados = 0;
 
 const contenedorProductos = document.getElementById("contenedor-productos");
-const txtCantidadProductos = document.getElementById("txtCantidadProductos");
 
 function mostrarProductos() {
     fetch('https://dummyjson.com/products').then(response => response.json()).then(prod => {
@@ -87,16 +86,27 @@ function agregarAlCarrito(id) {
 }
 
 function actualizarSeleccionados() {
-    contador = 0;
-    carritoDeCompras.forEach(producto => {
-        contador++;
-    });
+    let carrito = JSON.parse(localStorage.getItem("CarritoDeCompras"));
+    let contador = 0;
 
-    seleccionados = contador;
-    txtCantidadProductos.value = seleccionados;
+    if(carrito != null) {
+        carrito.forEach(producto => {
+            contador++;
+        });
+    } else {
+        contador = 0;
+    }
+
+    let span = document.getElementById('contador-carrito');
+    span.innerText = contador;
 }
 
 function cargarElementos() {
+    actualizarSeleccionados();
     mostrarProductos();
     estadoUsuario();
+}
+
+function sitioEnConstruccion() {
+    Swal.fire('Esta sección se encuentra en construcción no puedes acceder momentaneamente.');
 }
