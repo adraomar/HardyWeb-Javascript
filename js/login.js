@@ -1,7 +1,7 @@
 let dbUsuarios = [
-  { user: "admin", name: "Administrador", password: "admin" },
-  { user: "test", name: "Usuario Test", password: "test" },
-  { user: "omikpo", name: "Omar Adra", password: "4275591" }
+  { id: 1, user: "admin", name: "Administrador", password: "admin", status: false },
+  { id: 2, user: "test", name: "Usuario Test", password: "test", status: false },
+  { id: 3, user: "omikpo", name: "Omar Adra", password: "4275591", status: false }
 ];
 
 const btnIngresar = document.getElementById("btnIngresar");
@@ -33,17 +33,21 @@ function mostrarLogin() {
   }).then((result) => {
     let usuario = result.value.login;
     let password = result.value.password;
+    let u = buscarUsuario(usuario, password);
+    let lsData = {};
 
-    let validado = validarLogin(usuario, password);
-
-    if (validado) {
-
+    if(u != undefined) {
+      console.log("Usuario logueado");
+      crearNavUser(u);
+      lsData = {id: u.id, user: u.user, name: u.name, status: true};
+      localStorage.setItem("UserData", JSON.stringify(lsData));
+    } else {
+      console.log("Usuario y/o contraseña ingresada incorrecta!");
     }
-
   })
 }
 
-function crearNavUser() {
+function crearNavUser(usuario) {
   let ingresoRegistro = document.getElementById("ingreso-registro");
   let div = document.createElement("div");
 
@@ -52,7 +56,7 @@ function crearNavUser() {
   div.className = "dropdown me-5 pe-3";
   div.innerHTML = `
       <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          ${usuario}
+          ${usuario.name}
       </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
@@ -62,4 +66,12 @@ function crearNavUser() {
       </ul>
       `;
   ingresoRegistro.appendChild(div);
+}
+
+function buscarUsuario(usuario, pass) {
+  const u = dbUsuarios.find(us => {
+    return us.user === usuario && us.password === pass;
+  });
+
+  return u;
 }
