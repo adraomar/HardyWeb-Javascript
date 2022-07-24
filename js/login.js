@@ -1,4 +1,8 @@
-let aUsuarios = [{ user: "admin", name: "Omar Adra", password: "admin", status: true }];
+let dbUsuarios = [
+  { user: "admin", name: "Administrador", password: "admin" },
+  { user: "test", name: "Usuario Test", password: "test" },
+  { user: "omikpo", name: "Omar Adra", password: "4275591" }
+];
 
 const btnIngresar = document.getElementById("btnIngresar");
 const btnRegistrar = document.getElementById("btnRegistrar");
@@ -27,38 +31,28 @@ function mostrarLogin() {
       return { login: login, password: password }
     }
   }).then((result) => {
-    let validado = validarLogin(`${result.value.login}`, `${result.value.password}`);
+    let usuario = result.value.login;
+    let password = result.value.password;
+
+    let validado = validarLogin(usuario, password);
 
     if (validado) {
-      btnIngresar.remove();
-      btnRegistrar.remove();
-      crearNavUser();
-      localStorage.setItem("UserData", JSON.stringify(aUsuarios));
+
     }
 
   })
 }
 
-function validarLogin(usuario, password) {
-  let validado = false;
-
-  if (usuario === aUsuarios[0].user && password === aUsuarios[0].password) {
-    validado = true;
-  } else {
-    validado = false;
-  }
-
-  return validado;
-}
-
 function crearNavUser() {
   let ingresoRegistro = document.getElementById("ingreso-registro");
-
   let div = document.createElement("div");
+
+  btnIngresar.remove();
+  btnRegistrar.remove();
   div.className = "dropdown me-5 pe-3";
   div.innerHTML = `
       <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          ${aUsuarios[0].name}
+          ${usuario}
       </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
@@ -66,7 +60,6 @@ function crearNavUser() {
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="#">Desconectarse</a></li>
       </ul>
-      `
-
+      `;
   ingresoRegistro.appendChild(div);
 }
