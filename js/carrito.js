@@ -98,3 +98,7 @@ function cargarElementos() {
     mostrarCarrito();
     estadoUsuario();
 }
+
+function sitioEnConstruccion() {
+    Swal.fire('Esta sección se encuentra en construcción no puedes acceder momentaneamente.');
+}
